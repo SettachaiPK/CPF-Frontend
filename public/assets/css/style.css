@@ -58,10 +58,11 @@ code {
 .section-simple {
   position: relative;
   width: 100%;
-  min-height: 100vh;
+  min-height: calc(100vh - 94px);
   display: flex;
   align-items: center;
   background-color: white;
+  margin-top: 94px;
 }
 .container {
   width: 100%;

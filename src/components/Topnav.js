@@ -6,7 +6,7 @@ import Avatar from "@mui/material/Avatar";
 function Topnav(props) {
   const history = useHistory();
   const [offsetY, setOffsetY] = useState(0);
-  const user = { avatar: false, name: "Employee Name" };
+  const user = { avatar: null, name: "Employee Name" };
 
   const handleLogout = async (evt) => {
     evt.preventDefault();

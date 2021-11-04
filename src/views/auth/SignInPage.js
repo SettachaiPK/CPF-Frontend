@@ -25,7 +25,7 @@ function SignInPage(props) {
     <>
       <section className="section-simple">
         <div className="container">
-          <div
+          <div 
             className="simple-card box-shadow"
             data-aos="fade-up"
             data-aos-delay="0"

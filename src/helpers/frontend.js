@@ -27,3 +27,9 @@ export function formatDate(value, format = "DD/MM/YYYY") {
     return "";
   }
 }
+
+export function formatDateYMD(yourDate) {
+  const offset = yourDate.getTimezoneOffset();
+  yourDate = new Date(yourDate.getTime() - offset * 60 * 1000);
+  return yourDate.toISOString().split("T")[0];
+}
