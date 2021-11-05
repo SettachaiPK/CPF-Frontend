@@ -602,6 +602,18 @@ p.xxs,
   padding: 1.5rem !important;
 }
 
+/*Display*/
+.d-flex {
+  display: flex;
+}
+.d-flex-end {
+  display: flex;
+  justify-content: flex-end;
+}
+.d-block {
+  display: block;
+}
+
 /* Simple Card */
 .simple-card {
   width: 100%;
@@ -615,4 +627,53 @@ p.xxs,
   background-repeat: no-repeat;
   background-size: 100% auto;
   background-position: bottom center;
+}
+
+/*Employee*/
+.employee {
+  display: flex;
+  margin-top: 3rem;
+}
+.employee .section-work-detail {
+  margin-right: 2rem;
+}
+.employee .calendar-wrapper {
+  margin-bottom: 1rem;
+}
+.employee .detail .options {
+  display: flex;
+  justify-content: space-between;
+}
+.employee .scheduler {
+  margin-bottom: 3rem;
+}
+
+.timecard {
+  background-color: #79ab81;
+  padding: 1rem;
+  color: white;
+}
+.popup-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 5px 10px 8px #888888;
+  padding: 4rem;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.OverlayBase-absolutePosition-100 {
+  overflow-x: auto;
+}
+
+@media screen and (max-width: 1000px) {
+  .employee {
+    display: block;
+  }
+  .employee .section-work-detail {
+    display: flex;
+    justify-content: space-between;
+  }
 }

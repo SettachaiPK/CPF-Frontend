@@ -6,6 +6,6 @@ export class UserModel {
   }
 
   isAdmin() {
-    return this.role == 1 ? true : false;
+    return this.role === 1 ? true : false;
   }
 }

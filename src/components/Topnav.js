@@ -14,7 +14,7 @@ function Topnav(props) {
     history.push("/sign-in");
   };
 
-  useEffect(async () => {
+  useEffect(() => {
     setOffsetY(window.pageYOffset);
     const handleScroll = () => {
       setOffsetY(window.pageYOffset);

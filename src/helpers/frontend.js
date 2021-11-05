@@ -1,5 +1,4 @@
 import AOS from "aos";
-import moment from "moment";
 
 export async function onMounted(callback = null) {
   AOS.init({
@@ -17,19 +16,4 @@ export async function onMounted(callback = null) {
 export function formatNumber(value, digits = 2) {
   let val = (value / 1).toFixed(digits);
   return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
-export function formatDate(value, format = "DD/MM/YYYY") {
-  let string = moment(new Date(String(value))).format(format);
-  if (string) {
-    string = string.split("/");
-    return `${string[0]}/${string[1]}/${parseInt(string[2]) + 543}`;
-  } else {
-    return "";
-  }
-}
-
-export function formatDateYMD(yourDate) {
-  const offset = yourDate.getTimezoneOffset();
-  yourDate = new Date(yourDate.getTime() - offset * 60 * 1000);
-  return yourDate.toISOString().split("T")[0];
 }
