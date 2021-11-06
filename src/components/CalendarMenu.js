@@ -6,33 +6,20 @@ import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
 import CloseIcon from "@mui/icons-material/Close";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
-import TextField from "@mui/material/TextField";
 import DateTimePicker from "react-datetime-picker";
-import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import Avatar from "@mui/material/Avatar";
 import Slide from "@mui/material/Slide";
 import Collapse from "@mui/material/Collapse";
 import { onMounted } from "../helpers/frontend";
 
 function CalendarMenu(props) {
-  const history = useHistory();
-  const [offsetY, setOffsetY] = useState(0);
   const [start, setStart] = useState(0);
   const [stop, setStop] = useState(0);
   const [repeat, setRepeat] = useState(false);
 
   const handleChangeRepeat = () => {
     setRepeat((prev) => !prev);
-  };
-
-  const user = { avatar: null, name: "Employee Name" };
-
-  const handleLogout = async (evt) => {
-    evt.preventDefault();
-    window.scrollTo(0, 0);
-    history.push("/sign-in");
   };
 
   useEffect(() => {

@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { onMounted } from "../helpers/frontend";
 import Topnav from "../components/Topnav";
+import AddSchduleMenu from "../components/AddSchduleMenu";
 import {
   TableContainer,
   Table,
@@ -12,12 +13,18 @@ import {
   TableRow,
   TableCell,
   TablePagination,
+  Button,
 } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
+import DatePicker from "react-datepicker";
+import DateRangeIcon from "@mui/icons-material/DateRange";
+import "react-datepicker/dist/react-datepicker.css";
 
 function ManagerPage(props) {
   const history = useHistory();
 
+  const [startDate, setStartDate] = useState(new Date());
+  const [openAdd, setOpenAdd] = useState(false);
   const [paginate, setPaginate] = useState({ page: 1, pp: 10 });
   const options = [
     { value: "chocolate", label: "Chocolate" },
@@ -155,6 +162,9 @@ function ManagerPage(props) {
     setPaginate({ ...paginate, page: 1, pp: e.target.value });
   };
 
+  const handleOpenAdd = () => setOpenAdd(true);
+  const handleCloseAdd = () => setOpenAdd(false);
+
   useEffect(() => {
     onMounted();
     console.log("Manager page");
@@ -166,14 +176,47 @@ function ManagerPage(props) {
       <section className="section-simple">
         <div className="container manager">
           <TableContainer>
-            <div className="options">
+            <div className="options d-space-between table-options">
               <div className="option left">
                 <PersonIcon className="color-navy mr-1" />{" "}
                 <p className="color-navy">4 / 14</p>
               </div>
-              <div className="option right"></div>
+              <div className="option right">
+                <DatePicker
+                  selected={startDate}
+                  onChange={(date) => setStartDate(date)}
+                  customInput={<DateRangeIcon className="color-navy mr-2" />}
+                />
+                <select className="mr-2">
+                  <option value="" disabled selected>
+                    แผนก
+                  </option>
+                  <option value="1">สับไก่</option>
+                </select>
+                <Button
+                  className="bgcolor-navy mr-2"
+                  variant="contained"
+                  onClick={handleOpenAdd}
+                  sx={{
+                    fontFamily: "Kanit",
+                    borderRadius: "5px",
+                  }}
+                >
+                  เพิ่มตารางงาน
+                </Button>
+                <Button
+                  className="bgcolor-navy"
+                  variant="contained"
+                  sx={{
+                    fontFamily: "Kanit",
+                    borderRadius: "5px",
+                  }}
+                >
+                  จัดการตารางงาน
+                </Button>
+              </div>
             </div>
-            <select name="table">
+            <select id="table">
               <option value="1">งานถอนขน กะ 1 เวลา 05.00 - 13.00 น.</option>
               <option value="2">งานถอนขน กะ 2 เวลา 05.00 - 13.00 น.</option>
               <option value="3">งานถอนขน กะ 3 เวลา 05.00 - 13.00 น.</option>
@@ -240,6 +283,7 @@ function ManagerPage(props) {
           />
         </div>
       </section>
+      <AddSchduleMenu open={openAdd} onClose={handleCloseAdd} />
     </>
   );
 }

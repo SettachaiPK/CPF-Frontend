@@ -639,6 +639,10 @@ p.xxs,
   display: flex !important;
   justify-content: flex-end !important;
 }
+.d-flex-direction-row {
+  display: flex !important;
+  direction: row !important;
+}
 .d-space-between {
   display: flex !important;
   justify-content: space-between !important;
@@ -660,12 +664,20 @@ p.xxs,
 .manager th {
   background-color: #8fc598;
 }
-.MuiTableContainer-root select {
+.MuiTableContainer-root select#table {
   height: 53px;
   width: 100%;
   text-align: center;
   background-color: #8fc598;
   border: solid 1px #79ab81 !important;
+}
+.MuiTableContainer-root .table-options select {
+  font-size: 1rem;
+  min-width: 160px;
+  height: 2em;
+  background-color: #c4c4c4;
+  border: none;
+  border-radius: 3px;
 }
 .MuiTableContainer-root .options {
   padding: 0.5em;
@@ -677,6 +689,10 @@ p.xxs,
 .MuiTableContainer-root .option.left svg {
   width: 1.5em;
   height: 1.5em;
+}
+
+.border {
+  border: solid 1px #aaaaaa !important;
 }
 
 /* Simple Card */
@@ -794,6 +810,9 @@ p.xxs,
 }
 .calendar-menu-container .content .content-right select {
   width: 100%;
+}
+.react-datepicker-wrapper {
+  width: auto !important;
 }
 .react-datetime-picker__wrapper {
   padding: 0.5em;
