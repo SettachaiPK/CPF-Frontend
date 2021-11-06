@@ -614,6 +614,34 @@ p.xxs,
   display: block;
 }
 
+/*Table*/
+.manager th,
+.manager td {
+  border: solid 1px #79ab81 !important;
+  color: inherit !important;
+}
+.manager th {
+  background-color: #8fc598;
+}
+.MuiTableContainer-root select {
+  height: 53px;
+  width: 100%;
+  text-align: center;
+  background-color: #8fc598;
+  border: solid 1px #79ab81 !important;
+}
+.MuiTableContainer-root .options {
+  padding: 0.5em;
+}
+.MuiTableContainer-root .option {
+  display: flex;
+  align-items: center;
+}
+.MuiTableContainer-root .option.left svg {
+  width: 1.5em;
+  height: 1.5em;
+}
+
 /* Simple Card */
 .simple-card {
   width: 100%;
