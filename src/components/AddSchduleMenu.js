@@ -23,13 +23,23 @@ import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import FormGroup from "@mui/material/FormGroup";
 import DoDisturbOnIcon from "@mui/icons-material/DoDisturbOn";
+import AddWorkerModal from "./AddWorkerModal";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import InputAdornment from "@mui/material/InputAdornment";
+import DatePicker from "react-datepicker";
+import DateRangeIcon from "@mui/icons-material/DateRange";
+import "react-datepicker/dist/react-datepicker.css";
+import { formatDateYMD } from "../helpers/datetime";
 
 function AddSchduleMenu(props) {
-  const [workStart, setWorkStart] = useState(0);
-  const [workstop, setWorkStop] = useState(0);
-  const [selectWorker, setSelectWorker] = useState("all");
-  const [edit, setEdit] = useState(false);
-  const [worker, setWorker] = useState([
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
+  const [startTime, setStartTime] = useState("09.00");
+  const [endTime, setEndTime] = useState("21.00");
+  const [workAmout, setWorkAmout] = useState("");
+  const [workHours, setWorkHours] = useState("");
+  const [selectWorker, setSelectWorker] = useState(false);
+  const worker = [
     { name: "สมปอง งานวัด", checked: false },
     { name: "สมปอง งานวัด", checked: false },
     { name: "สมปอง งานวัด", checked: false },
@@ -40,20 +50,13 @@ function AddSchduleMenu(props) {
     { name: "สมปอง งานวัด", checked: false },
     { name: "สมปอง งานวัด", checked: false },
     { name: "สมปอง งานวัด", checked: false },
-  ]);
+  ];
 
-  const handleChangeSelectWorker = (event) => {
-    setSelectWorker(event.target.value);
-    setEdit(false);
-  };
-  const handleWorkerEdit = () => {
-    setSelectWorker("");
-    setEdit(true);
+  const handleWorkerAdd = () => {
+    setSelectWorker(true);
   };
 
-  useEffect(() => {
-    onMounted();
-  }, []);
+  useEffect(() => {}, []);
   return (
     <>
       <Modal open={props.open} onClose={props.onClose}>
@@ -62,11 +65,15 @@ function AddSchduleMenu(props) {
             <div className="calendar-menu-container">
               <div className="options d-space-between header">
                 <div className="option left">
-                  <CloseIcon onClick={props.onClose} />
+                  <div className="cursor-pointer">
+                    <CloseIcon onClick={props.onClose} />
+                  </div>
                 </div>
                 <div className="option right d-flex">
                   <div className="option other">
-                    <DeleteOutlineOutlinedIcon />
+                    <div className="cursor-pointer">
+                      <DeleteOutlineOutlinedIcon />
+                    </div>
                   </div>
                   <div className="option save">
                     <Button
@@ -74,7 +81,7 @@ function AddSchduleMenu(props) {
                       variant="contained"
                       sx={{
                         fontFamily: "Kanit",
-                        borderRadius: "25px",
+                        borderRadius: "5px",
                       }}
                     >
                       <p>บันทึก</p>
@@ -90,81 +97,90 @@ function AddSchduleMenu(props) {
                     variant="outlined"
                     fullWidth
                   />
-                  <p className="mb-5">เลือกเวลาที่ใช้ในตารางงาน</p>
+                  <p className="mb-5">เลือกวันที่ทำงาน</p>
                   <div className="datetime-picker-wrapper mb-5">
-                    <DateTimePicker onChange={setWorkStart} value={workStart} />
-                    <h5 className="color-grey px-6">-</h5>
-                    <DateTimePicker onChange={setWorkStop} value={workstop} />
-                  </div>
-                  <FormControl fullWidth className="mb-5">
-                    <InputLabel id="demo-simple-select-label">
-                      ประเภท
-                    </InputLabel>
-                    <Select
-                      labelId="demo-simple-select-label"
-                      id="demo-simple-select"
-                      label="ประเภท"
-                      defaultValue={1}
+                    <FormControl
+                      sx={{ m: 1, width: "25ch" }}
+                      variant="outlined"
                     >
-                      <MenuItem value={0}>ปกติ</MenuItem>
-                      <MenuItem value={1}>โอที</MenuItem>
-                    </Select>
-                  </FormControl>
-                  <RadioGroup
-                    row
-                    value={selectWorker}
-                    onChange={handleChangeSelectWorker}
-                    defaultValue="all"
-                    aria-label="worker"
-                    name="customized-radios"
-                    className="mb-5"
-                  >
-                    <FormControlLabel
-                      value="all"
-                      control={
-                        <Radio
-                          disableRipple
-                          color="primary"
-                          checkedIcon={<CheckBoxIcon />}
-                          icon={<CheckBoxOutlineBlankIcon />}
-                          {...props}
-                        />
-                      }
-                      label="พนักงานทุกคน"
-                    />
-                    <FormControlLabel
-                      value="some"
-                      control={
-                        <Radio
-                          disableRipple
-                          color="primary"
-                          checkedIcon={<CheckBoxIcon />}
-                          icon={<CheckBoxOutlineBlankIcon />}
-                          {...props}
-                        />
-                      }
-                      label="พนักงานบางคน"
-                    />
-                  </RadioGroup>
-                  <p className="mb-5">เลือกเวลาในการทำงานของพนักงาน</p>
+                      <OutlinedInput
+                        value={formatDateYMD(startDate)}
+                        endAdornment={
+                          <InputAdornment position="end">
+                            <DatePicker
+                              selected={startDate}
+                              onChange={(date) => setStartDate(date)}
+                              customInput={
+                                <DateRangeIcon className="color-navy mr-2" />
+                              }
+                            />
+                          </InputAdornment>
+                        }
+                      />
+                    </FormControl>
+
+                    <h5 className="color-grey px-6 mt-2">-</h5>
+                    <FormControl
+                      sx={{ m: 1, width: "25ch" }}
+                      variant="outlined"
+                    >
+                      <OutlinedInput
+                        value={formatDateYMD(endDate)}
+                        endAdornment={
+                          <InputAdornment position="end">
+                            <DatePicker
+                              selected={endDate}
+                              onChange={(date) => setEndDate(date)}
+                              customInput={
+                                <DateRangeIcon className="color-navy mr-2" />
+                              }
+                            />
+                          </InputAdornment>
+                        }
+                      />
+                    </FormControl>
+                  </div>
+                  <p className="mb-5">เลือกเวลาที่ทำงาน</p>
                   <div className="datetime-picker-wrapper mb-5">
-                    <DateTimePicker onChange={setWorkStart} value={workStart} />
-                    <h5 className="color-grey px-6">-</h5>
-                    <DateTimePicker onChange={setWorkStop} value={workstop} />
+                    <TextField
+                      value={startTime}
+                      onChange={(event) => setStartTime(event.target.value)}
+                      sx={{ m: 1, width: "25ch" }}
+                    />
+                    <h5 className="color-grey px-6 mt-2">-</h5>
+                    <TextField
+                      value={endTime}
+                      onChange={(event) => setEndTime(event.target.value)}
+                      sx={{ m: 1, width: "25ch" }}
+                    />
+                  </div>
+                  <div className="d-space-between mb-5">
+                    <TextField
+                      label="จำนวนกะ"
+                      value={workAmout}
+                      onChange={(event) => setWorkAmout(event.target.value)}
+                      sx={{ m: 1, width: "25ch" }}
+                    />
+                    <TextField
+                      label="ชั่วโมงกะ"
+                      value={workHours}
+                      onChange={(event) => setWorkHours(event.target.value)}
+                      sx={{ m: 1, width: "25ch" }}
+                    />
                   </div>
                   <Button
-                    className="bgcolor-lightgreen"
-                    onClick={handleWorkerEdit}
+                    className="bgcolor-navy"
+                    onClick={handleWorkerAdd}
                     variant="contained"
                     sx={{
                       fontFamily: "Kanit",
-                      borderRadius: "25px",
+                      borderRadius: "5px",
                     }}
                   >
-                    <p>แก้ไขพนักงาน</p>
+                    <p>เพิ่มพนักงาน</p>
                   </Button>
                 </div>
-                <Collapse orientation="horizontal" in={selectWorker === "some"}>
+                <Collapse orientation="horizontal" in={selectWorker}>
                   <div className="content-right">
                     <FormGroup>
                       {worker.map((d, i) => {
@@ -172,23 +188,6 @@ function AddSchduleMenu(props) {
                           <FormControlLabel
                             className="border"
                             control={<Checkbox />}
-                            label={d.name}
-                          />
-                        );
-                      })}
-                    </FormGroup>
-                  </div>
-                </Collapse>
-                <Collapse orientation="horizontal" in={edit}>
-                  <div className="content-right">
-                    <FormGroup>
-                      {worker.map((d, i) => {
-                        return (
-                          <FormControlLabel
-                            className="border"
-                            control={
-                              <DoDisturbOnIcon className="p-3" color="error" />
-                            }
                             label={d.name}
                           />
                         );

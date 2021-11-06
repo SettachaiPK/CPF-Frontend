@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { onMounted } from "../helpers/frontend";
 import Topnav from "../components/Topnav";
-import AddSchduleMenu from "../components/AddSchduleMenu";
+import EditSchduleMenu from "../components/EditSchduleMenu";
 import {
   TableContainer,
   Table,
@@ -16,15 +16,17 @@ import {
   Button,
 } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
-import DatePicker from "react-datepicker";
 import DateRangeIcon from "@mui/icons-material/DateRange";
+import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import AddSchduleMenu from "../components/AddSchduleMenu";
 
 function ManagerPage(props) {
   const history = useHistory();
 
   const [startDate, setStartDate] = useState(new Date());
   const [openAdd, setOpenAdd] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false);
   const [paginate, setPaginate] = useState({ page: 1, pp: 10 });
   const options = [
     { value: "chocolate", label: "Chocolate" },
@@ -164,6 +166,8 @@ function ManagerPage(props) {
 
   const handleOpenAdd = () => setOpenAdd(true);
   const handleCloseAdd = () => setOpenAdd(false);
+  const handleOpenEdit = () => setOpenEdit(true);
+  const handleCloseEdit = () => setOpenEdit(false);
 
   useEffect(() => {
     onMounted();
@@ -182,11 +186,13 @@ function ManagerPage(props) {
                 <p className="color-navy">4 / 14</p>
               </div>
               <div className="option right">
-                <DatePicker
-                  selected={startDate}
-                  onChange={(date) => setStartDate(date)}
-                  customInput={<DateRangeIcon className="color-navy mr-2" />}
-                />
+                <div className="cursor-pointer">
+                  <DatePicker
+                    selected={startDate}
+                    onChange={(date) => setStartDate(date)}
+                    customInput={<DateRangeIcon className="color-navy mr-2" />}
+                  />
+                </div>
                 <select className="mr-2">
                   <option value="" disabled selected>
                     แผนก
@@ -207,6 +213,7 @@ function ManagerPage(props) {
                 <Button
                   className="bgcolor-navy"
                   variant="contained"
+                  onClick={handleOpenEdit}
                   sx={{
                     fontFamily: "Kanit",
                     borderRadius: "5px",
@@ -283,6 +290,7 @@ function ManagerPage(props) {
           />
         </div>
       </section>
+      <EditSchduleMenu open={openEdit} onClose={handleCloseEdit} />
       <AddSchduleMenu open={openAdd} onClose={handleCloseAdd} />
     </>
   );

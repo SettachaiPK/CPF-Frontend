@@ -33,11 +33,15 @@ function CalendarMenu(props) {
             <div className="calendar-menu-container">
               <div className="options d-space-between header">
                 <div className="option left">
-                  <CloseIcon onClick={props.onClose} />
+                  <div className="cursor-pointer">
+                    <CloseIcon onClick={props.onClose} />
+                  </div>
                 </div>
                 <div className="option right d-flex">
                   <div className="option other">
-                    <DeleteOutlineOutlinedIcon />
+                    <div className="cursor-pointer">
+                      <DeleteOutlineOutlinedIcon />
+                    </div>
                   </div>
                   <div className="option save">
                     <Button
@@ -80,7 +84,7 @@ function CalendarMenu(props) {
                     </select>
                     <div className="d-item-bottom ">
                       <p>ทำซ้ำทุก</p>
-                      <input type="number" className="inp-day-repeat"/>
+                      <input type="number" className="inp-day-repeat" />
                       <p>วัน</p>
                     </div>
                   </div>

@@ -655,6 +655,11 @@ p.xxs,
   display: block !important;
 }
 
+/*Utility*/
+.cursor-pointer {
+  cursor: pointer !important;
+}
+
 /*Table*/
 .manager th,
 .manager td {
@@ -796,7 +801,7 @@ p.xxs,
 .calendar-menu-container .content .content-left {
   min-width: 575px;
 }
-.calendar-menu-container .content .datetime-picker-wrapper {
+.datetime-picker-wrapper {
   display: flex;
 }
 .calendar-menu-container .content .content-right select,
@@ -824,4 +829,8 @@ p.xxs,
 .inp-day-repeat {
   width: 66px;
   margin: 0 1em 0 1em !important;
+}
+
+.add-worker .MuiOutlinedInput-root {
+  width: 256px;
 }
